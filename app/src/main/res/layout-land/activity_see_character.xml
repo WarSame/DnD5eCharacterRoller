@@ -1,0 +1,275 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".SeeCharacter"
+    android:id="@+id/seeCharacterLand"
+    android:background="#E2D5B0"
+    android:weightSum="8">
+
+
+
+    <TableRow
+        android:layout_width="match_parent">
+        <LinearLayout android:layout_weight="4"
+            android:weightSum="4">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Class"
+            android:id="@+id/classTextView"
+            android:layout_marginTop="14dp"
+            android:layout_weight="4"
+            android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_weight="4"
+            android:weightSum="4">
+            <View
+                android:layout_width="4dp"
+                android:gravity="left"
+                android:layout_weight="0"
+                android:layout_height="match_parent"
+                android:background="#663300"/>
+
+            <ImageView
+                tools:ignore="ContentDescription"
+                android:id="@+id/classicon"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/barbarianicon50"
+                android:layout_gravity="end"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Class Value"
+                android:id="@+id/classValueView"
+                android:layout_marginTop="14dp"
+                android:layout_weight="3"
+                android:gravity="left"/>
+        </LinearLayout>
+    </TableRow>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="#663300"/>
+<!-- Wide bar ends here-->
+
+    <TableRow android:layout_width="match_parent">
+        <LinearLayout
+            android:layout_weight="2"
+            android:weightSum="2">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Strength"
+            android:id="@+id/strengthTextView"
+            android:layout_marginTop="20dp"
+            android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_weight="2"
+            android:weightSum="2">
+            <View
+                android:layout_width="4dp"
+                android:gravity="left"
+                android:layout_weight="0"
+                android:layout_height="match_parent"
+                android:background="#663300"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Strength Value"
+                android:id="@+id/strengthValView"
+                android:layout_marginTop="20dp"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="2"
+            android:weightSum="2">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Intelligence"
+            android:id="@+id/intelligenceTextView"
+            android:layout_marginTop="20dp"
+            android:layout_weight="2"
+            android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="2"
+            android:weightSum="2">
+            <View
+                android:layout_width="4dp"
+                android:gravity="left"
+                android:layout_weight="0"
+                android:layout_height="match_parent"
+                android:background="#663300"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Intelligence Value"
+                android:id="@+id/intelligenceValView"
+                android:layout_marginTop="20dp"
+                android:layout_weight="2"
+                android:gravity="center" />
+        </LinearLayout>
+    </TableRow>
+
+
+    <TableRow android:layout_width="match_parent">
+        <LinearLayout
+            android:layout_weight="2"
+            android:weightSum="2">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Dexterity"
+                android:id="@+id/dexterityTextView"
+                android:layout_marginTop="20dp"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_weight="2"
+            android:weightSum="2">
+            <View
+                android:layout_width="4dp"
+                android:gravity="left"
+                android:layout_weight="0"
+                android:layout_height="match_parent"
+                android:background="#663300"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Dexterity Value"
+                android:id="@+id/dexterityValView"
+                android:layout_marginTop="20dp"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="2"
+            android:weightSum="2">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Wisdom"
+                android:id="@+id/wisdomTextView"
+                android:layout_marginTop="20dp"
+                android:layout_weight="2"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="2"
+            android:weightSum="2">
+            <View
+                android:layout_width="4dp"
+                android:gravity="left"
+                android:layout_weight="0"
+                android:layout_height="match_parent"
+                android:background="#663300"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Wisdom Value"
+                android:id="@+id/wisdomValView"
+                android:layout_marginTop="20dp"
+                android:layout_weight="2"
+                android:gravity="center" />
+        </LinearLayout>
+    </TableRow>
+
+    <TableRow android:layout_width="match_parent">
+        <LinearLayout
+            android:layout_weight="2"
+            android:weightSum="2">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Constitution"
+                android:id="@+id/constitutionTextView"
+                android:layout_marginTop="20dp"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_weight="2"
+            android:weightSum="2">
+            <View
+                android:layout_width="4dp"
+                android:gravity="left"
+                android:layout_weight="0"
+                android:layout_height="match_parent"
+                android:background="#663300"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Constitution Value"
+                android:id="@+id/constitutionValView"
+                android:layout_marginTop="20dp"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="2"
+            android:weightSum="2">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Charisma"
+                android:id="@+id/charismaTextView"
+                android:layout_marginTop="20dp"
+                android:layout_weight="2"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="2"
+            android:weightSum="2">
+            <View
+                android:layout_width="4dp"
+                android:gravity="left"
+                android:layout_weight="0"
+                android:layout_height="match_parent"
+                android:background="#663300"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Charisma Value"
+                android:id="@+id/charismaValView"
+                android:layout_marginTop="20dp"
+                android:layout_weight="2"
+                android:gravity="center" />
+        </LinearLayout>
+    </TableRow>
+
+</TableLayout>
