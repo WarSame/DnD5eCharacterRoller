@@ -40,7 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            layout="@layout/individual_class_layout"
+            layout="@layout/horizontal_class_row_layout"
             android:id="@+id/strValues"
             android:layout_column="0" />
 
@@ -48,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            layout="@layout/individual_class_layout"
+            layout="@layout/horizontal_class_row_layout"
             android:id="@+id/intValues"
             android:layout_column="0" />
     </TableRow>
@@ -62,7 +62,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            layout="@layout/individual_class_layout"
+            layout="@layout/horizontal_class_row_layout"
             android:id="@+id/dexValues"
             android:layout_column="0" />
 
@@ -70,7 +70,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            layout="@layout/individual_class_layout"
+            layout="@layout/horizontal_class_row_layout"
             android:id="@+id/wisValues"
             android:layout_column="0" />
     </TableRow>
@@ -83,7 +83,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            layout="@layout/individual_class_layout"
+            layout="@layout/horizontal_class_row_layout"
             android:id="@+id/conValues"
             android:layout_column="0" />
 
@@ -91,7 +91,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            layout="@layout/individual_class_layout"
+            layout="@layout/horizontal_class_row_layout"
             android:id="@+id/chaValues"
             android:layout_column="0" />
     </TableRow>

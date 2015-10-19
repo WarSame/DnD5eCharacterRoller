@@ -22,4 +22,5 @@
     <string name="rightElString">Right Element</string>
     <string name="statNameString">Stat Name</string>
     <string name="statValString">Stat Value</string>
+    <string name="classNameString">Class Name</string>
 </resources>

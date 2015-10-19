@@ -10,14 +10,14 @@
         android:layout_weight="4"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/statNameString"
+        android:text="@string/classNameString"
         android:id="@+id/statName"
         android:layout_marginTop="20dp"
         android:gravity="center" />
 
     <View
         android:layout_width="4dp"
-        android:gravity="left"
+        android:gravity="center"
         android:layout_height="match_parent"
         android:background="#663300"/>
     <ImageView
@@ -34,9 +34,9 @@
         android:layout_weight="3"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/statValString"
+        android:text="@string/classValString"
         android:id="@+id/statVal"
         android:layout_marginTop="20dp"
-        android:gravity="center" />
+        android:gravity="center"/>
 
 </LinearLayout>

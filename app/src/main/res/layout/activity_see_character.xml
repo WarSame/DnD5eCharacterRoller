@@ -10,232 +10,102 @@
     android:weightSum="8">
 
     <TableRow
-        android:layout_width="match_parent">
-        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/classString"
-            android:id="@+id/classTextView"
-            android:layout_marginTop="14dp"
-            android:layout_weight="4"
-            android:gravity="center"/>
-
-        <LinearLayout>
-        <View
-            android:layout_width="4dp"
-            android:gravity="left"
-            android:layout_weight="0"
-            android:layout_height="match_parent"
-            android:background="#663300"/>
-
-        <ImageView
-            tools:ignore="ContentDescription"
-            android:id="@+id/classicon"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/barbarianicon50"
-            android:layout_gravity="end"
-            android:layout_weight="1"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/classValString"
-            android:id="@+id/classValueView"
-            android:layout_marginTop="14dp"
-            android:layout_weight="3"
-            android:gravity="left"/>
-        </LinearLayout>
+            android:layout_weight="1"
+            layout="@layout/class_type_row"
+            android:id="@+id/classValues"
+            android:layout_column="0" />
     </TableRow>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:background="#663300"/>
+    <!-- Wide bar ends here-->
 
-    <TableRow android:layout_width="match_parent">
-        <TextView
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/strString"
-            android:id="@+id/strengthTextView"
-            android:layout_marginTop="44dp"
-            android:gravity="center" />
-
-        <LinearLayout>
-        <View
-            android:layout_width="4dp"
-            android:gravity="left"
-            android:layout_weight="0"
-            android:layout_height="match_parent"
-            android:background="#663300"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/strValString"
-            android:id="@+id/strengthValView"
-            android:layout_marginTop="44dp"
-            android:gravity="center" />
-        </LinearLayout>
-    </TableRow>
-
-    <TableRow android:layout_width="match_parent">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/dexString"
-            android:id="@+id/dexterityTextView"
-            android:layout_marginTop="44dp"
-            android:layout_weight="4"
-            android:gravity="center" />
-
-        <LinearLayout>
-        <View
-            android:layout_width="4dp"
-            android:gravity="left"
-            android:layout_weight="0"
-            android:layout_height="match_parent"
-            android:background="#663300"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/dexValString"
-            android:id="@+id/dexterityValView"
-            android:layout_marginTop="44dp"
-            android:layout_weight="4"
-            android:gravity="center" />
-        </LinearLayout>
-    </TableRow>
-
-    <TableRow android:layout_width="match_parent">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/conString"
-            android:id="@+id/constitutionTextView"
-            android:layout_marginTop="44dp"
-            android:layout_weight="4"
-            android:gravity="center" />
-
-        <LinearLayout>
-        <View
-            android:layout_width="4dp"
-            android:gravity="left"
-            android:layout_weight="0"
-            android:layout_height="match_parent"
-            android:background="#663300"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/conValString"
-            android:id="@+id/constitutionValView"
-            android:layout_marginTop="44dp"
-            android:layout_weight="4"
-            android:gravity="center" />
-        </LinearLayout>
+            android:layout_weight="1"
+            layout="@layout/vertical_class_row_layout"
+            android:id="@+id/strValues"
+            android:layout_column="0" />
     </TableRow>
 
     <TableRow
-        android:layout_width="match_parent">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/intString"
-            android:id="@+id/intelligenceTextView"
-            android:layout_marginTop="44dp"
-            android:layout_weight="4"
-            android:gravity="center" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <LinearLayout>
-        <View
-            android:layout_width="4dp"
-            android:gravity="left"
-            android:layout_weight="0"
-            android:layout_height="match_parent"
-            android:background="#663300"/>
-        <TextView
+        <include
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/intValString"
-            android:id="@+id/intelligenceValView"
-            android:layout_marginTop="44dp"
-            android:layout_weight="4"
-            android:gravity="center" />
-        </LinearLayout>
+            android:layout_weight="1"
+            layout="@layout/vertical_class_row_layout"
+            android:id="@+id/dexValues"
+            android:layout_column="0" />
+
     </TableRow>
 
     <TableRow
-        android:layout_width="match_parent">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/wisString"
-            android:id="@+id/wisdomTextView"
-            android:layout_marginTop="44dp"
-            android:layout_weight="4"
-            android:gravity="center" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <LinearLayout>
-        <View
-            android:layout_width="4dp"
-            android:gravity="left"
-            android:layout_weight="0"
-            android:layout_height="match_parent"
-            android:background="#663300"/>
-        <TextView
+        <include
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/wisValString"
-            android:id="@+id/wisdomValView"
-            android:layout_marginTop="44dp"
-            android:layout_weight="4"
-            android:gravity="center" />
-        </LinearLayout>
+            android:layout_weight="1"
+            layout="@layout/vertical_class_row_layout"
+            android:id="@+id/conValues"
+            android:layout_column="0" />
+
+    </TableRow>
+
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            layout="@layout/vertical_class_row_layout"
+            android:id="@+id/intValues"
+            android:layout_column="0" />
     </TableRow>
 
     <TableRow
-        android:layout_width="match_parent">
-        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/chaString"
-            android:id="@+id/charismaTextView"
-            android:layout_marginTop="44dp"
-            android:layout_weight="4"
-            android:gravity="center" />
-
-        <LinearLayout>
-        <View
-            android:layout_width="4dp"
-            android:gravity="left"
-            android:layout_weight="0"
-            android:layout_height="match_parent"
-            android:background="#663300"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/chaValString"
-            android:id="@+id/charismaValView"
-            android:layout_marginTop="44dp"
-            android:layout_weight="4"
-            android:gravity="center" />
-        </LinearLayout>
+            android:layout_weight="1"
+            layout="@layout/vertical_class_row_layout"
+            android:id="@+id/wisValues"
+            android:layout_column="0" />
     </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            layout="@layout/vertical_class_row_layout"
+            android:id="@+id/chaValues"
+            android:layout_column="0" />
+    </TableRow>
+
 
 </TableLayout>

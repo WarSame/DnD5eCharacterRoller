@@ -16,11 +16,10 @@ import java.util.Collections;
 import java.util.Random;
 
 public class SeeCharacter extends AppCompatActivity {
-
-
     String rollString = SelectRoll.getRollString();
     String classString = SelectClass.getClassString();
     int[] finalStats = new int[6];
+    private ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,49 +89,10 @@ public class SeeCharacter extends AppCompatActivity {
         }
 
         //Fill the values for the elements. This assumes it is opened in
-        fillVerticalValues();
+        fillViewValues();
 
         ImageView imageView = (ImageView) findViewById(R.id.classicon);
-
-        switch (classString){
-            case "Barbarian":
-                imageView.setImageResource(R.drawable.barbarianicon50);
-                break;
-            case "Bard":
-                imageView.setImageResource(R.drawable.bardicon50);
-                break;
-            case "Cleric":
-                imageView.setImageResource(R.drawable.clericicon50);
-                break;
-            case "Druid":
-                imageView.setImageResource(R.drawable.druidicon50);
-                break;
-            case "Fighter":
-                imageView.setImageResource(R.drawable.fightericon50);
-                break;
-            case "Monk":
-                imageView.setImageResource(R.drawable.monkicon50);
-                break;
-            case "Paladin":
-                imageView.setImageResource(R.drawable.paladinicon50);
-                break;
-            case "Ranger":
-                imageView.setImageResource(R.drawable.rangericon50);
-                break;
-            case "Rogue":
-                imageView.setImageResource(R.drawable.rogueicon50);
-                break;
-            case "Sorcerer":
-                imageView.setImageResource(R.drawable.sorcerericon50);
-                break;
-            case "Warlock":
-                imageView.setImageResource(R.drawable.warlockicon50);
-                break;
-            case "Wizard":
-                imageView.setImageResource(R.drawable.wizardicon50);
-                break;
-
-        }
+        setImage(imageView, classString);
         imageView.setAdjustViewBounds(true);
 
     }
@@ -224,7 +184,6 @@ public class SeeCharacter extends AppCompatActivity {
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -247,16 +206,16 @@ public class SeeCharacter extends AppCompatActivity {
         if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
         {
             setContentView(R.layout.activity_see_character);
-            fillHorizontalValues();
+            fillViewValues();
         }else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
         {
             setContentView(R.layout.activity_see_character);
-            fillVerticalValues();
+            fillViewValues();
         }
     }
 
-    private void fillHorizontalValues() {
-        //Gather views for horizontal
+    private void fillViewValues() {
+        //Gather views
         LinearLayout llClass = (LinearLayout)findViewById(R.id.classValues);
         LinearLayout llStr = (LinearLayout)findViewById(R.id.strValues);
         LinearLayout llDex = (LinearLayout)findViewById(R.id.dexValues);
@@ -265,9 +224,10 @@ public class SeeCharacter extends AppCompatActivity {
         LinearLayout llWis = (LinearLayout)findViewById(R.id.wisValues);
         LinearLayout llCha = (LinearLayout)findViewById(R.id.chaValues);
 
-        //Get the horizontal layout's locations
+        //Get the layout's locations
         TextView classNameView = (TextView) llClass.findViewById(R.id.statName);
         TextView classValView = (TextView) llClass.findViewById(R.id.statVal);
+        ImageView classImage = (ImageView)  llClass.findViewById(R.id.classicon);
 
         TextView strNameView = (TextView) llStr.findViewById(R.id.statName);
         TextView strValView = (TextView) llStr.findViewById(R.id.statVal);
@@ -299,6 +259,7 @@ public class SeeCharacter extends AppCompatActivity {
 
         //Values
         classValView.setText(classString);
+        setImage(classImage, classString);
         strValView.setText(String.format("%d", finalStats[0]));
         dexValView.setText(String.format("%d", finalStats[1]));
         conValView.setText(String.format("%d", finalStats[2]));
@@ -307,27 +268,46 @@ public class SeeCharacter extends AppCompatActivity {
         chaValView.setText(String.format("%d", finalStats[5]));
     }
 
-    private void fillVerticalValues() {
-        //Gather class view
-        TextView classView = (TextView)findViewById(R.id.classValueView);
+    public void setImage(ImageView image, String classString) {
 
-        //Gather stat value textView locations
-        TextView strengthView = (TextView)findViewById(R.id.strengthValView);
-        TextView dexterityView = (TextView)findViewById(R.id.dexterityValView);
-        TextView constitutionView = (TextView)findViewById(R.id.constitutionValView);
-        TextView intelligenceView = (TextView)findViewById(R.id.intelligenceValView);
-        TextView wisdomView = (TextView)findViewById(R.id.wisdomValView);
-        TextView charismaView = (TextView)findViewById(R.id.charismaValView);
+        switch (classString){
+            case "Barbarian":
+                image.setImageResource(R.drawable.barbarianicon50);
+                break;
+            case "Bard":
+                image.setImageResource(R.drawable.bardicon50);
+                break;
+            case "Cleric":
+                image.setImageResource(R.drawable.clericicon50);
+                break;
+            case "Druid":
+                image.setImageResource(R.drawable.druidicon50);
+                break;
+            case "Fighter":
+                image.setImageResource(R.drawable.fightericon50);
+                break;
+            case "Monk":
+                image.setImageResource(R.drawable.monkicon50);
+                break;
+            case "Paladin":
+                image.setImageResource(R.drawable.paladinicon50);
+                break;
+            case "Ranger":
+                image.setImageResource(R.drawable.rangericon50);
+                break;
+            case "Rogue":
+                image.setImageResource(R.drawable.rogueicon50);
+                break;
+            case "Sorcerer":
+                image.setImageResource(R.drawable.sorcerericon50);
+                break;
+            case "Warlock":
+                image.setImageResource(R.drawable.warlockicon50);
+                break;
+            case "Wizard":
+                image.setImageResource(R.drawable.wizardicon50);
+                break;
 
-        //Fills those views with the appropriate data
-        classView.setText(classString);
-
-        strengthView.setText(String.format("%d", finalStats[0]));
-        dexterityView.setText(String.format("%d", finalStats[1]));
-        constitutionView.setText(String.format("%d", finalStats[2]));
-        intelligenceView.setText(String.format("%d", finalStats[3]));
-        wisdomView.setText(String.format("%d", finalStats[4]));
-        charismaView.setText(String.format("%d", finalStats[5]));
+        }
     }
-
 }
