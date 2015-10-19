@@ -1,11 +1,13 @@
 package com.example.graeme.dnd5echaracterroller;
 
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,6 +16,11 @@ import java.util.Collections;
 import java.util.Random;
 
 public class SeeCharacter extends AppCompatActivity {
+
+
+    String rollString = SelectRoll.getRollString();
+    String classString = SelectClass.getClassString();
+    int[] finalStats = new int[6];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +34,9 @@ public class SeeCharacter extends AppCompatActivity {
         catch (NullPointerException e){
             System.out.println("Nullpointer action bar");
         }
-        String rollString = SelectRoll.getRollString();
-        String classString = SelectClass.getClassString();
 
         ArrayList<Integer> rollList = new ArrayList<>();
         ArrayList<Integer> statList = new ArrayList<>();
-
-        int[] finalStats = new int[6];
 
         if (rollString != null && rollString.equals("4d6 Drop Worst Roll")){
             //For 4d6 drop one
@@ -86,25 +89,8 @@ public class SeeCharacter extends AppCompatActivity {
             }
         }
 
-        //Gather class view
-        TextView classView = (TextView)findViewById(R.id.classValueView);
-
-        //Gather stat value textView locations
-        TextView strengthView = (TextView)findViewById(R.id.strengthValView);
-        TextView dexterityView = (TextView)findViewById(R.id.dexterityValView);
-        TextView constitutionView = (TextView)findViewById(R.id.constitutionValView);
-        TextView intelligenceView = (TextView)findViewById(R.id.intelligenceValView);
-        TextView wisdomView = (TextView)findViewById(R.id.wisdomValView);
-        TextView charismaView = (TextView)findViewById(R.id.charismaValView);
-
-        //Fills those views with the appropriate data
-        classView.setText(classString);
-        strengthView.setText(Integer.toString(finalStats[0]));
-        dexterityView.setText(Integer.toString(finalStats[1]));
-        constitutionView.setText(Integer.toString(finalStats[2]));
-        intelligenceView.setText(Integer.toString(finalStats[3]));
-        wisdomView.setText(Integer.toString(finalStats[4]));
-        charismaView.setText(Integer.toString(finalStats[5]));
+        //Fill the values for the elements. This assumes it is opened in
+        fillVerticalValues();
 
         ImageView imageView = (ImageView) findViewById(R.id.classicon);
 
@@ -253,4 +239,94 @@ public class SeeCharacter extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            setContentView(R.layout.activity_see_character);
+            fillHorizontalValues();
+        }else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
+        {
+            fillVerticalValues();
+        }
+    }
+
+    private void fillHorizontalValues() {
+        //Gather views for horizontal
+        LinearLayout llClass = (LinearLayout)findViewById(R.id.classValues);
+        LinearLayout llStr = (LinearLayout)findViewById(R.id.strValues);
+        LinearLayout llDex = (LinearLayout)findViewById(R.id.dexValues);
+        LinearLayout llCon = (LinearLayout)findViewById(R.id.conValues);
+        LinearLayout llInt = (LinearLayout)findViewById(R.id.intValues);
+        LinearLayout llWis = (LinearLayout)findViewById(R.id.wisValues);
+        LinearLayout llCha = (LinearLayout)findViewById(R.id.chaValues);
+
+        //Get the horizontal layout's locations
+        TextView classNameView = (TextView) llClass.findViewById(R.id.statName);
+        TextView classValView = (TextView) llClass.findViewById(R.id.statVal);
+
+        TextView strNameView = (TextView) llStr.findViewById(R.id.statName);
+        TextView strValView = (TextView) llStr.findViewById(R.id.statVal);
+
+        TextView dexNameView = (TextView) llDex.findViewById(R.id.statName);
+        TextView dexValView = (TextView) llDex.findViewById(R.id.statVal);
+
+        TextView conNameView = (TextView) llCon.findViewById(R.id.statName);
+        TextView conValView = (TextView) llCon.findViewById(R.id.statVal);
+
+        TextView intNameView = (TextView) llInt.findViewById(R.id.statName);
+        TextView intValView = (TextView) llInt.findViewById(R.id.statVal);
+
+        TextView wisNameView = (TextView) llWis.findViewById(R.id.statName);
+        TextView wisValView = (TextView) llWis.findViewById(R.id.statVal);
+
+        TextView chaNameView = (TextView) llCha.findViewById(R.id.statName);
+        TextView chaValView = (TextView) llCha.findViewById(R.id.statVal);
+
+        //Fill those values
+        //Names of sections
+        classNameView.setText(getResources().getString(R.string.classString));
+        strNameView.setText(getResources().getString(R.string.strString));
+        dexNameView.setText(getResources().getString(R.string.dexString));
+        conNameView.setText(getResources().getString(R.string.conString));
+        intNameView.setText(getResources().getString(R.string.intString));
+        wisNameView.setText(getResources().getString(R.string.wisString));
+        chaNameView.setText(getResources().getString(R.string.chaString));
+
+        //Values
+        classValView.setText(classString);
+        strValView.setText(String.format("%d", finalStats[0]));
+        dexValView.setText(String.format("%d", finalStats[1]));
+        conValView.setText(String.format("%d", finalStats[2]));
+        intValView.setText(String.format("%d", finalStats[3]));
+        wisValView.setText(String.format("%d", finalStats[4]));
+        chaValView.setText(String.format("%d", finalStats[5]));
+    }
+
+
+    private void fillVerticalValues() {
+        //Gather class view
+        TextView classView = (TextView)findViewById(R.id.classValueView);
+
+        //Gather stat value textView locations
+        TextView strengthView = (TextView)findViewById(R.id.strengthValView);
+        TextView dexterityView = (TextView)findViewById(R.id.dexterityValView);
+        TextView constitutionView = (TextView)findViewById(R.id.constitutionValView);
+        TextView intelligenceView = (TextView)findViewById(R.id.intelligenceValView);
+        TextView wisdomView = (TextView)findViewById(R.id.wisdomValView);
+        TextView charismaView = (TextView)findViewById(R.id.charismaValView);
+
+        //Fills those views with the appropriate data
+        classView.setText(classString);
+        strengthView.setText(String.format("%d", finalStats[0]));
+        dexterityView.setText(String.format("%d", finalStats[1]));
+        constitutionView.setText(String.format("%d", finalStats[2]));
+        intelligenceView.setText(String.format("%d", finalStats[3]));
+        wisdomView.setText(String.format("%d", finalStats[4]));
+        charismaView.setText(String.format("%d", finalStats[5]));
+    }
+
 }

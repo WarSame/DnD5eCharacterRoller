@@ -13,7 +13,7 @@ public class RollArrayAdapter extends ArrayAdapter<String> {
     private final String[] values;
 
     public RollArrayAdapter(Context context, String[] values) {
-        super(context, R.layout.rolllayout, values);
+        super(context, R.layout.roll_layout, values);
         this.context = context;
         this.values = values;
     }
@@ -22,7 +22,7 @@ public class RollArrayAdapter extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View rowView = inflater.inflate(R.layout.rolllayout, parent, false);
+        View rowView = inflater.inflate(R.layout.roll_layout, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.rollname);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.rollicon);
         textView.setText(values[position]);

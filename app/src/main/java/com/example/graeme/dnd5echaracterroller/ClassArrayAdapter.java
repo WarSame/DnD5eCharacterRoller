@@ -13,7 +13,7 @@ public class ClassArrayAdapter extends ArrayAdapter<String> {
     private final String[] values;
 
     public ClassArrayAdapter(Context context, String[] values) {
-        super(context, R.layout.classlayout, values);
+        super(context, R.layout.class_layout, values);
         this.context = context;
         this.values = values;
     }
@@ -22,7 +22,7 @@ public class ClassArrayAdapter extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View rowView = inflater.inflate(R.layout.classlayout, parent, false);
+        View rowView = inflater.inflate(R.layout.class_layout, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.classname);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.classicon);
         textView.setText(values[position]);

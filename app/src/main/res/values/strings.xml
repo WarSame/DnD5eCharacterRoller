@@ -4,4 +4,22 @@
     <string name="title_activity_select_roll">Select A Roll Set</string>
     <string name="title_activity_select_class">Select A Class</string>
     <string name="title_activity_see_character">See Your Character</string>
+    <string name="classString">Class</string>
+    <string name="classValString">Class Value</string>
+    <string name="strString">Strength</string>
+    <string name="strValString">Strength Value</string>
+    <string name="dexString">Dexterity</string>
+    <string name="dexValString">Dexterity Value</string>
+    <string name="conString">Constitution</string>
+    <string name="conValString">Constitution Value</string>
+    <string name="intString">Intelligence</string>
+    <string name="intValString">Intelligence Value</string>
+    <string name="wisString">Wisdom</string>
+    <string name="wisValString">Wisdom Value</string>
+    <string name="chaString">Charisma</string>
+    <string name="chaValString">Charisma Value</string>
+    <string name="leftElString">Left Element</string>
+    <string name="rightElString">Right Element</string>
+    <string name="statNameString">Stat Name</string>
+    <string name="statValString">Stat Value</string>
 </resources>
