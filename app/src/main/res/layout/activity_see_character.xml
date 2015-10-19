@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/strValString"
+            android:text="@string/strString"
             android:id="@+id/strengthTextView"
             android:layout_marginTop="44dp"
             android:gravity="center" />

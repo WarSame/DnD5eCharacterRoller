@@ -250,6 +250,7 @@ public class SeeCharacter extends AppCompatActivity {
             fillHorizontalValues();
         }else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
         {
+            setContentView(R.layout.activity_see_character);
             fillVerticalValues();
         }
     }
@@ -306,7 +307,6 @@ public class SeeCharacter extends AppCompatActivity {
         chaValView.setText(String.format("%d", finalStats[5]));
     }
 
-
     private void fillVerticalValues() {
         //Gather class view
         TextView classView = (TextView)findViewById(R.id.classValueView);
@@ -321,6 +321,7 @@ public class SeeCharacter extends AppCompatActivity {
 
         //Fills those views with the appropriate data
         classView.setText(classString);
+
         strengthView.setText(String.format("%d", finalStats[0]));
         dexterityView.setText(String.format("%d", finalStats[1]));
         constitutionView.setText(String.format("%d", finalStats[2]));
