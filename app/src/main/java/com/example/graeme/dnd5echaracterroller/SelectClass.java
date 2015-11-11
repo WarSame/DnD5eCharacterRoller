@@ -24,12 +24,17 @@ public class SelectClass extends AppCompatActivity {
         return classString;
     }
 
-    private ListView mListView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_class);
+        //Add back button to action bar
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        catch (NullPointerException e){
+            System.out.println("Nullpointer action bar");
+        }
 
         //Initialize the available class choices
         final String[] classes = {"Barbarian","Bard","Cleric","Druid",
@@ -37,6 +42,7 @@ public class SelectClass extends AppCompatActivity {
         "Warlock", "Wizard"};
 
         // Initialize the listview
+        ListView mListView;
         mListView = (ListView) findViewById(R.id.listViewId);
 
         //Set adapter for the listview
@@ -48,7 +54,7 @@ public class SelectClass extends AppCompatActivity {
         AdapterView.OnItemClickListener itemClickedHandler = new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View v, int position, long id){
                 //Start a new intent headed to selectRoll, fill it with the class string selected
-                Intent sendClassIntent = new Intent(SelectClass.this, SelectRoll.class);
+                Intent sendClassIntent = new Intent(SelectClass.this, SeeCharacter.class);
 
                 //Each list item has an image, and text
                 //First grab the list item, then grab the text from it
@@ -69,6 +75,11 @@ public class SelectClass extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

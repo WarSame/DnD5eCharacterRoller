@@ -1,5 +1,6 @@
 package com.example.graeme.dnd5echaracterroller;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,12 +33,8 @@ public class SeeCharacter extends AppCompatActivity {
         setContentView(R.layout.activity_see_character);
 
         //Add back button to action bar
-        try {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-        catch (NullPointerException e){
-            System.out.println("Nullpointer action bar");
-        }
+        assert getSupportActionBar()!=null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ArrayList<Integer> rollList = new ArrayList<>();
         ArrayList<Integer> statList = new ArrayList<>();
@@ -95,6 +97,19 @@ public class SeeCharacter extends AppCompatActivity {
         setImage(imageView, classString);
         imageView.setAdjustViewBounds(true);
 
+        //Save generated character set to memory of phone
+        String ROLL_HISTORY_FILE = "roll_history";
+        try {
+            DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(openFileOutput(ROLL_HISTORY_FILE,Context.MODE_PRIVATE)));
+            dos.write(classString.getBytes());//Write class type
+            for (int stat: finalStats){//Write rolled stats in order
+                dos.writeInt(stat);
+                dos.flush();
+            }
+            dos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
