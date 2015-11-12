@@ -1,7 +1,8 @@
 package com.example.graeme.dnd5echaracterroller;
 
 public enum RollStringEnum {
-    FOURD6DROPWORST("4d6 Drop Worst Roll"),THREED6("3d6"),THREED6ASROLLED("3d6 Assign As Rolled");
+    FOUR_D6_DROP_WORST("4d6 Drop Worst Roll"),THREE_D6("3d6"),THREE_D6_AS_ROLLED("3d6 Assign As Rolled"),
+    STANDARD_ARRAY("Standard Array");
 
     private String rollName;
 

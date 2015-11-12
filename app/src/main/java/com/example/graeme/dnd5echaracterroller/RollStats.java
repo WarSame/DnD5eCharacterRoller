@@ -13,7 +13,7 @@ public class RollStats {
 
         if (rollString!=null){
             switch (rollString){
-                case FOURD6DROPWORST:
+                case FOUR_D6_DROP_WORST:
                     //For 4d6 drop one
                     //Roll 4 dice for each stat
                     for (int j=0;j<6;j++) {
@@ -28,7 +28,7 @@ public class RollStats {
                     //Assort the stats based upon class preference
                     finalStats = assignStats(statList, classString);
                     break;
-                case THREED6:
+                case THREE_D6:
                     //For 3d6 assign
                     for (int j=0;j<6;j++) {
                         for (int i = 0; i < 3; i++) {
@@ -41,7 +41,7 @@ public class RollStats {
                     //Assort the stats upon class preference
                     finalStats = assignStats(statList, classString);
                     break;
-                case THREED6ASROLLED:
+                case THREE_D6_AS_ROLLED:
                     //For 3d6, assign as rolled in order
                     for (int j = 0; j < 6; j++) {
                         for (int i = 0; i < 3; i++) {
@@ -55,6 +55,15 @@ public class RollStats {
                     for (int i = 0; i<statList.size();i++){
                         finalStats[i] = statList.get(i);
                     }
+                    break;
+                case STANDARD_ARRAY:
+                    int[] standardArray = new int[]{15,14,13,12,10,8};
+                    //Assign the standard stats to the stat list
+                    for (int i =0;i<standardArray.length;i++){
+                        statList.add(standardArray[i]);
+                    }
+                    //Assort the stats upon class preference
+                    finalStats = assignStats(statList, classString);
                     break;
             }
         }
@@ -70,45 +79,7 @@ public class RollStats {
     private static int[] assignStats(ArrayList<Integer> statList, ClassStringEnum classString) {
         //Given the stats that have been rolled, and the class name
         //This function orders the stats in the optimal order for that class
-        Integer[] statPriority = new Integer[]{};
-        switch (classString) {
-            case BARBARIAN:
-                statPriority= new Integer[]{0, 2, 1, 5, 3, 4};
-                break;
-            case BARD:
-                statPriority= new Integer[]{4, 2, 1, 5, 3, 0};
-                break;
-            case CLERIC:
-                statPriority= new Integer[]{3, 2, 1, 5, 0, 4};
-                break;
-            case DRUID:
-                statPriority= new Integer[]{5, 1, 2, 4, 0, 3};
-                break;
-            case FIGHTER:
-                statPriority= new Integer[]{0, 3, 1, 4, 2, 5};
-                break;
-            case MONK:
-                statPriority= new Integer[]{3, 0, 2, 5, 1, 4};
-                break;
-            case PALADIN:
-                statPriority= new Integer[]{0, 4, 2, 5, 3, 1};
-                break;
-            case RANGER:
-                statPriority= new Integer[]{4, 0, 1, 3, 2, 5};
-                break;
-            case ROGUE:
-                statPriority= new Integer[]{4, 0, 2, 5, 3, 1};
-                break;
-            case SORCERER:
-                statPriority= new Integer[]{5, 1, 2, 3, 4, 0};
-                break;
-            case WARLOCK:
-                statPriority = new Integer[]{5, 1, 2, 4, 3, 0};
-                break;
-            case WIZARD:
-                statPriority = new Integer[]{5, 1, 2, 0, 3, 4};
-                break;
-        }
+        Integer[] statPriority = classString.getClassPriority();
 
         int[] sortedStats = new int[6];
 
