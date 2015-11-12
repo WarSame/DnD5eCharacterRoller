@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.OutputStreamWriter;
 
 public class SeeCharacter extends AppCompatActivity {
@@ -41,6 +43,7 @@ public class SeeCharacter extends AppCompatActivity {
 
         //Save generated character set to memory of phone
         String ROLL_HISTORY_FILE = "roll_history";
+
         try {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(openFileOutput(ROLL_HISTORY_FILE,Context.MODE_APPEND)));
             bw.write(classString);//Write class type
@@ -51,6 +54,7 @@ public class SeeCharacter extends AppCompatActivity {
             bw.close();
         } catch (Exception e) {
             e.printStackTrace();
+            Log.w("File error","Unable to write to file");
         }
     }
 

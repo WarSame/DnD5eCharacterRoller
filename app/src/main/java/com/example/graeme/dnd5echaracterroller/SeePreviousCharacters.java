@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +42,7 @@ public class SeePreviousCharacters extends AppCompatActivity {
     private ViewPager mViewPager;
     private int pageCount;
     private ArrayList<String> previousChars;
+    public static final String EMPTY_FILE_STRING = "EMPTY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,7 @@ public class SeePreviousCharacters extends AppCompatActivity {
             br.close();
         } catch (Exception e) {
             e.printStackTrace();
+            Log.w("File error", "Unable to read file - FNF");
         }
         //Then update the number of pages that we need to display
         pageCount = previousChars.size();
@@ -120,12 +123,18 @@ public class SeePreviousCharacters extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
+            if (pageCount==0){
+                return PlaceholderFragment.newInstance( EMPTY_FILE_STRING );
+            }
             return PlaceholderFragment.newInstance( previousChars.get(position) );
         }
 
         @Override
         public int getCount() {
             // Return the value we determined earlier from our file's number of characters
+            if (pageCount==0){//If we have an empty file, tell them to make a character
+                return 1;
+            }
             return pageCount;
         }
     }
@@ -159,10 +168,19 @@ public class SeePreviousCharacters extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View pageView = inflater.inflate(R.layout.fragment_see_previous_characters, container, false);
+            View pageView;
 
-            String charString=getArguments().getString(CHAR_STRING);
-            fillViewValues(pageView, charString);
+            String charString=getArguments().getString(CHAR_STRING);//Get character string values from the file
+            assert charString!=null;
+            if (charString.equals(EMPTY_FILE_STRING)){//If the file is empty, show that there are no characters
+                Log.i("Empty string","Empty string from file");
+                pageView = inflater.inflate(R.layout.fragment_no_previous_characters, container, false);
+            }
+            else {//If it has characters, create the character layout and fill it
+                pageView = inflater.inflate(R.layout.fragment_see_previous_characters, container, false);
+                fillViewValues(pageView, charString);
+            }
+
             return pageView;
         }
 

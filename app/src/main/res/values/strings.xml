@@ -27,4 +27,6 @@
     <string name="seePreviousCharactersString">See Previous Characters</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="finishString">Finish</string>
+    <string name="noPreviousCharactersString">You have made no characters. Please make a character.</string>
+
 </resources>
