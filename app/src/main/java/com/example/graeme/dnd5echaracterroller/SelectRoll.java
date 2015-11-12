@@ -14,11 +14,11 @@ import android.widget.TextView;
 
 public class SelectRoll extends AppCompatActivity {
 
-    private static String rollString;
-    public static void setRollString(String rollString) {
+    private static RollStringEnum rollString;
+    public static void setRollString(RollStringEnum rollString) {
         SelectRoll.rollString = rollString;
     }
-    public static String getRollString() {
+    public static RollStringEnum getRollString() {
         return rollString;
     }
     @Override
@@ -35,7 +35,13 @@ public class SelectRoll extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.listViewId);
 
         //Initialize the roll options available, then fill them into the list view
-        final String[] rolls = {"4d6 Drop Worst Roll", "3d6", "3d6 Assign As Rolled"};
+        final RollStringEnum[] rollsEnum = RollStringEnum.values();
+
+        final String[] rolls= new String[rollsEnum.length];
+        for (int i =0;i<rollsEnum.length;i++){
+            rolls[i]=rollsEnum[i].getRollString();
+        }
+
 
         RollArrayAdapter rollAdapter = new RollArrayAdapter(this, rolls);
 
@@ -50,7 +56,8 @@ public class SelectRoll extends AppCompatActivity {
                 //First grab the list item, then grab the text from it
                 LinearLayout ll = (LinearLayout)v;
                 TextView tv = (TextView)(ll).findViewById(R.id.rollname);
-                setRollString((String) (tv.getText()));
+                String tvText = (String)tv.getText();
+                setRollString(RollStringEnum.fromString(tvText));
 
                 startActivity(sendRollIntent);
             }

@@ -6,53 +6,56 @@ import java.util.Collections;
 import java.util.Random;
 
 public class RollStats {
-    public static int[] determineStats(String rollString, String classString){
+    public static int[] determineStats(RollStringEnum rollString, ClassStringEnum classString){
         ArrayList<Integer> rollList = new ArrayList<>();
         ArrayList<Integer> statList = new ArrayList<>();
         int[] finalStats = new int[6];
 
-        if (rollString != null && rollString.equals("4d6 Drop Worst Roll")){
-            //For 4d6 drop one
-            //Roll 4 dice for each stat
-            for (int j=0;j<6;j++) {
-                for (int i = 0; i < 4; i++) {
-                    rollList.add(rollD6());
-                }
-                //Remove the lowest roll and sum the rest, then add it to the list of stats
-                rollList.remove(Collections.min(rollList));
-                statList.add(sum(rollList));
-                rollList=new ArrayList<>();
-            }
-            //Assort the stats based upon class preference
-            finalStats = assignStats(statList, classString);
-        }
-
-        else if (rollString!=null&&rollString.equals("3d6")){
-            //For 3d6 assign
-            for (int j=0;j<6;j++) {
-                for (int i = 0; i < 3; i++) {
-                    rollList.add(rollD6());
-                }
-                //Add the sum of the rolls to the stat list
-                statList.add(sum(rollList));
-                rollList=new ArrayList<>();
-            }
-            //Assort the stats upon class preference
-            finalStats = assignStats(statList, classString);
-        }
-        else if (rollString!=null&&rollString.equals("3d6 Assign As Rolled")) {
-            //For 3d6, assign as rolled in order
-            for (int j = 0; j < 6; j++) {
-                for (int i = 0; i < 3; i++) {
-                    rollList.add(rollD6());
-                }
-                //Add the sum of the rolls to the stat list
-                statList.add(sum(rollList));
-                rollList = new ArrayList<>();
-            }
-            //Do not assort the stats - assign them in the order they are rolled
-            for (int i = 0; i<statList.size();i++){
-                finalStats[i] = statList.get(i);
+        if (rollString!=null){
+            switch (rollString){
+                case FOURD6DROPWORST:
+                    //For 4d6 drop one
+                    //Roll 4 dice for each stat
+                    for (int j=0;j<6;j++) {
+                        for (int i = 0; i < 4; i++) {
+                            rollList.add(rollD6());
+                        }
+                        //Remove the lowest roll and sum the rest, then add it to the list of stats
+                        rollList.remove(Collections.min(rollList));
+                        statList.add(sum(rollList));
+                        rollList=new ArrayList<>();
+                    }
+                    //Assort the stats based upon class preference
+                    finalStats = assignStats(statList, classString);
+                    break;
+                case THREED6:
+                    //For 3d6 assign
+                    for (int j=0;j<6;j++) {
+                        for (int i = 0; i < 3; i++) {
+                            rollList.add(rollD6());
+                        }
+                        //Add the sum of the rolls to the stat list
+                        statList.add(sum(rollList));
+                        rollList=new ArrayList<>();
+                    }
+                    //Assort the stats upon class preference
+                    finalStats = assignStats(statList, classString);
+                    break;
+                case THREED6ASROLLED:
+                    //For 3d6, assign as rolled in order
+                    for (int j = 0; j < 6; j++) {
+                        for (int i = 0; i < 3; i++) {
+                            rollList.add(rollD6());
+                        }
+                        //Add the sum of the rolls to the stat list
+                        statList.add(sum(rollList));
+                        rollList = new ArrayList<>();
+                    }
+                    //Do not assort the stats - assign them in the order they are rolled
+                    for (int i = 0; i<statList.size();i++){
+                        finalStats[i] = statList.get(i);
+                    }
+                    break;
             }
         }
         else {
@@ -64,45 +67,45 @@ public class RollStats {
         return finalStats;
     }
 
-    private static int[] assignStats(ArrayList<Integer> statList, String classString) {
+    private static int[] assignStats(ArrayList<Integer> statList, ClassStringEnum classString) {
         //Given the stats that have been rolled, and the class name
         //This function orders the stats in the optimal order for that class
         Integer[] statPriority = new Integer[]{};
         switch (classString) {
-            case "Barbarian":
+            case BARBARIAN:
                 statPriority= new Integer[]{0, 2, 1, 5, 3, 4};
                 break;
-            case "Bard":
+            case BARD:
                 statPriority= new Integer[]{4, 2, 1, 5, 3, 0};
                 break;
-            case "Cleric":
+            case CLERIC:
                 statPriority= new Integer[]{3, 2, 1, 5, 0, 4};
                 break;
-            case "Druid":
+            case DRUID:
                 statPriority= new Integer[]{5, 1, 2, 4, 0, 3};
                 break;
-            case "Fighter":
+            case FIGHTER:
                 statPriority= new Integer[]{0, 3, 1, 4, 2, 5};
                 break;
-            case "Monk":
+            case MONK:
                 statPriority= new Integer[]{3, 0, 2, 5, 1, 4};
                 break;
-            case "Paladin":
+            case PALADIN:
                 statPriority= new Integer[]{0, 4, 2, 5, 3, 1};
                 break;
-            case "Ranger":
+            case RANGER:
                 statPriority= new Integer[]{4, 0, 1, 3, 2, 5};
                 break;
-            case "Rogue":
+            case ROGUE:
                 statPriority= new Integer[]{4, 0, 2, 5, 3, 1};
                 break;
-            case "Sorcerer":
+            case SORCERER:
                 statPriority= new Integer[]{5, 1, 2, 3, 4, 0};
                 break;
-            case "Warlock":
+            case WARLOCK:
                 statPriority = new Integer[]{5, 1, 2, 4, 3, 0};
                 break;
-            case "Wizard":
+            case WIZARD:
                 statPriority = new Integer[]{5, 1, 2, 0, 3, 4};
                 break;
         }

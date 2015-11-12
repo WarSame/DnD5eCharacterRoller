@@ -14,14 +14,12 @@ import android.widget.TextView;
 
 public class SelectClass extends AppCompatActivity {
 
-    private static String classString;
-
-    public static void setClassString(String classString) {
-        SelectClass.classString = classString;
+    private static ClassStringEnum classStringEnum;
+    public static void setClassString(ClassStringEnum classString) {
+        SelectClass.classStringEnum = classString;
     }
-
-    public static String getClassString() {
-        return classString;
+    public static ClassStringEnum getClassString() {
+        return classStringEnum;
     }
 
     @Override
@@ -29,17 +27,21 @@ public class SelectClass extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_class);
         //Add back button to action bar
+        assert getSupportActionBar()!=null;
         try {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         catch (NullPointerException e){
-            System.out.println("Nullpointer action bar");
+            System.out.println("Null pointer action bar");
         }
 
         //Initialize the available class choices
-        final String[] classes = {"Barbarian","Bard","Cleric","Druid",
-        "Fighter","Monk","Paladin","Ranger","Rogue","Sorcerer",
-        "Warlock", "Wizard"};
+        final ClassStringEnum[] classesEnum = ClassStringEnum.values();
+
+        final String[] classes= new String[classesEnum.length];
+        for (int i =0;i<classesEnum.length;i++){
+            classes[i]=classesEnum[i].getClassString();
+        }
 
         // Initialize the listview
         ListView mListView;
@@ -60,7 +62,11 @@ public class SelectClass extends AppCompatActivity {
                 //First grab the list item, then grab the text from it
                 LinearLayout ll = (LinearLayout)v;
                 TextView tv = (TextView)(ll).findViewById(R.id.classname);
-                setClassString((String)(tv.getText()));
+                String tvText = (String)tv.getText();
+                for (int i =0;i<tvText.length();i++){
+                    System.out.println(tvText.charAt(i));
+                }
+                setClassString(ClassStringEnum.fromString(tvText));
 
                 startActivity(sendClassIntent);
             }

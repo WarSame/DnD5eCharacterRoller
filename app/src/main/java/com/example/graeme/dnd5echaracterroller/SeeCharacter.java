@@ -15,12 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.OutputStreamWriter;
 
 public class SeeCharacter extends AppCompatActivity {
-    String rollString = SelectRoll.getRollString();
-    String classString = SelectClass.getClassString();
+    RollStringEnum rollString = SelectRoll.getRollString();
+    ClassStringEnum classString = SelectClass.getClassString();
     int[] finalStats;
 
     @Override
@@ -38,7 +37,7 @@ public class SeeCharacter extends AppCompatActivity {
         fillViewValues();
 
         ImageView imageView = (ImageView) findViewById(R.id.classicon);
-        imageView.setImageResource(GetImage.SelectImage(classString));
+        imageView.setImageResource(GetImage.SelectImage(classString.getClassString()));
         imageView.setAdjustViewBounds(true);
 
         //Save generated character set to memory of phone
@@ -46,7 +45,7 @@ public class SeeCharacter extends AppCompatActivity {
 
         try {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(openFileOutput(ROLL_HISTORY_FILE,Context.MODE_APPEND)));
-            bw.write(classString);//Write class type
+            bw.write(classString.getClassString());//Write class type
             for (int stat: finalStats){//Write rolled stats in order
                 bw.write(" " +String.valueOf(stat));
             }
@@ -149,8 +148,8 @@ public class SeeCharacter extends AppCompatActivity {
         chaNameView.setText(getResources().getString(R.string.chaString));
 
         //Values
-        classValView.setText(classString);
-        classImage.setImageResource(GetImage.SelectImage(classString));
+        classValView.setText(classString.getClassString());
+        classImage.setImageResource(GetImage.SelectImage(classString.getClassString()));
 
         strValView.setText(String.format("%d", finalStats[0]));
         dexValView.setText(String.format("%d", finalStats[1]));
