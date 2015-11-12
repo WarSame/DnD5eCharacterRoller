@@ -25,6 +25,6 @@
     <string name="classNameString">Class Name</string>
     <string name="rollCharacterString">Roll A Character</string>
     <string name="seePreviousCharactersString">See Previous Characters</string>
-    <string name="title_activity_see_previous_characters">SeePreviousCharacters</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="finishString">Finish</string>
 </resources>

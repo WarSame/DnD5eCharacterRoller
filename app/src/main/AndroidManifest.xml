@@ -38,7 +38,7 @@
         </activity>
         <activity
             android:name=".SeePreviousCharacters"
-            android:label="@string/title_activity_see_previous_characters"
+            android:label="@string/seePreviousCharactersString"
             android:parentActivityName=".SelectPath"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data

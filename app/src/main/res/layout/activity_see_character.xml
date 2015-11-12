@@ -18,8 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             layout="@layout/class_type_row"
-            android:id="@+id/classValues"
-            android:layout_column="0" />
+            android:id="@+id/classValues" />
     </TableRow>
 
     <View
@@ -38,8 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             layout="@layout/vertical_class_row_layout"
-            android:id="@+id/strValues"
-            android:layout_column="0" />
+            android:id="@+id/strValues" />
     </TableRow>
 
     <TableRow
@@ -51,8 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             layout="@layout/vertical_class_row_layout"
-            android:id="@+id/dexValues"
-            android:layout_column="0" />
+            android:id="@+id/dexValues" />
 
     </TableRow>
 
@@ -65,8 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             layout="@layout/vertical_class_row_layout"
-            android:id="@+id/conValues"
-            android:layout_column="0" />
+            android:id="@+id/conValues" />
 
     </TableRow>
 
@@ -79,8 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             layout="@layout/vertical_class_row_layout"
-            android:id="@+id/intValues"
-            android:layout_column="0" />
+            android:id="@+id/intValues" />
     </TableRow>
 
     <TableRow
@@ -91,8 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             layout="@layout/vertical_class_row_layout"
-            android:id="@+id/wisValues"
-            android:layout_column="0" />
+            android:id="@+id/wisValues" />
     </TableRow>
 
     <TableRow
@@ -103,9 +97,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             layout="@layout/vertical_class_row_layout"
-            android:id="@+id/chaValues"
-            android:layout_column="0" />
+            android:id="@+id/chaValues" />
     </TableRow>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/finishString"
+        android:id="@+id/finishButton"
+        android:onClick="finishCharacter"
+        android:layout_margin="5dp" />
 
 
 </TableLayout>

@@ -1,7 +1,5 @@
 package com.example.graeme.dnd5echaracterroller;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -16,7 +14,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class SeePreviousCharacters extends AppCompatActivity {
 
@@ -34,6 +39,8 @@ public class SeePreviousCharacters extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private int pageCount;
+    private ArrayList<String> previousChars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,26 +51,39 @@ public class SeePreviousCharacters extends AppCompatActivity {
         setSupportActionBar(toolbar);
         assert getSupportActionBar()!=null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
+        previousChars = new ArrayList<>();
+        ArrayList<String> tmp = new ArrayList<>();
+        String ROLL_HISTORY_FILE = "roll_history";
+        try {//Read strings in from file
+            BufferedReader br = new BufferedReader(new InputStreamReader(new BufferedInputStream(openFileInput(ROLL_HISTORY_FILE))));
+            String line;
+            do {//Read all characters in from file
+                line = br.readLine();
+                if (line!=null){
+                    tmp.add(line);
+                    System.out.println(line);
+                }
+            }while (line!=null);
+
+            for (int i=tmp.size()-1;i>=0;i--){//Reverse the list so we get most recent characters
+                previousChars.add(tmp.get(i));
+            }
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //Then update the number of pages that we need to display
+        pageCount = previousChars.size();
+
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -78,12 +98,10 @@ public class SeePreviousCharacters extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -102,26 +120,13 @@ public class SeePreviousCharacters extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            return PlaceholderFragment.newInstance( previousChars.get(position) );
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "SECTION 1";
-                case 1:
-                    return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
-            }
-            return null;
+            // Return the value we determined earlier from our file's number of characters
+            return pageCount;
         }
     }
 
@@ -133,16 +138,17 @@ public class SeePreviousCharacters extends AppCompatActivity {
          * The fragment argument representing the section number for this
          * fragment.
          */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+        private static final String CHAR_STRING = "class_string";
 
         /**
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
+        public static PlaceholderFragment newInstance(String classString) {
+            //Return data for this version of a page
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            args.putString(CHAR_STRING, classString);
             fragment.setArguments(args);
             return fragment;
         }
@@ -153,10 +159,73 @@ public class SeePreviousCharacters extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_see_previous_characters, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
+            View pageView = inflater.inflate(R.layout.fragment_see_previous_characters, container, false);
+
+            String charString=getArguments().getString(CHAR_STRING);
+            fillViewValues(pageView, charString);
+            return pageView;
+        }
+
+        private void fillViewValues(View pageView, String charString) {
+            //Gather rows of view
+            LinearLayout llClass = (LinearLayout)pageView.findViewById(R.id.classValues);
+            LinearLayout llStr = (LinearLayout)pageView.findViewById(R.id.strValues);
+            LinearLayout llDex = (LinearLayout)pageView.findViewById(R.id.dexValues);
+            LinearLayout llCon = (LinearLayout)pageView.findViewById(R.id.conValues);
+            LinearLayout llInt = (LinearLayout)pageView.findViewById(R.id.intValues);
+            LinearLayout llWis = (LinearLayout)pageView.findViewById(R.id.wisValues);
+            LinearLayout llCha = (LinearLayout)pageView.findViewById(R.id.chaValues);
+
+            //Get the layout's locations within a row
+            TextView classNameView = (TextView) llClass.findViewById(R.id.statName);
+            TextView classValView = (TextView) llClass.findViewById(R.id.statVal);
+            ImageView classImage = (ImageView)  llClass.findViewById(R.id.classicon);
+
+            TextView strNameView = (TextView) llStr.findViewById(R.id.statName);
+            TextView strValView = (TextView) llStr.findViewById(R.id.statVal);
+
+            TextView dexNameView = (TextView) llDex.findViewById(R.id.statName);
+            TextView dexValView = (TextView) llDex.findViewById(R.id.statVal);
+
+            TextView conNameView = (TextView) llCon.findViewById(R.id.statName);
+            TextView conValView = (TextView) llCon.findViewById(R.id.statVal);
+
+            TextView intNameView = (TextView) llInt.findViewById(R.id.statName);
+            TextView intValView = (TextView) llInt.findViewById(R.id.statVal);
+
+            TextView wisNameView = (TextView) llWis.findViewById(R.id.statName);
+            TextView wisValView = (TextView) llWis.findViewById(R.id.statVal);
+
+            TextView chaNameView = (TextView) llCha.findViewById(R.id.statName);
+            TextView chaValView = (TextView) llCha.findViewById(R.id.statVal);
+
+            //Fill those values
+            //Names of sections
+            classNameView.setText(getResources().getString(R.string.classString));
+            strNameView.setText(getResources().getString(R.string.strString));
+            dexNameView.setText(getResources().getString(R.string.dexString));
+            conNameView.setText(getResources().getString(R.string.conString));
+            intNameView.setText(getResources().getString(R.string.intString));
+            wisNameView.setText(getResources().getString(R.string.wisString));
+            chaNameView.setText(getResources().getString(R.string.chaString));
+
+            //Values
+            String classString;
+            int[] finalStats = new int[6];
+            String[] splitCharString = charString.split(" ");
+            classString=splitCharString[0];
+            for (int i=0;i<6;i++){
+                finalStats[i] = Integer.parseInt(splitCharString[i+1]);
+            }
+
+            classValView.setText(classString);
+            classImage.setImageResource(GetImage.SelectImage(classString));
+            strValView.setText(String.format("%d", finalStats[0]));
+            dexValView.setText(String.format("%d", finalStats[1]));
+            conValView.setText(String.format("%d", finalStats[2]));
+            intValView.setText(String.format("%d", finalStats[3]));
+            wisValView.setText(String.format("%d", finalStats[4]));
+            chaValView.setText(String.format("%d", finalStats[5]));
         }
     }
 }
