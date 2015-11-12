@@ -95,5 +95,12 @@
             android:id="@+id/chaValues"
             android:layout_column="0" />
     </TableRow>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/finishString"
+        android:id="@+id/finishButton"
+        android:onClick="finishCharacter"
+        android:layout_margin="5dp" />
 
 </TableLayout>

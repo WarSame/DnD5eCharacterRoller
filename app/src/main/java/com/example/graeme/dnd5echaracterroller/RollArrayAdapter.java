@@ -8,11 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class RollArrayAdapter extends ArrayAdapter<String> {
+public class RollArrayAdapter extends ArrayAdapter<RollStringEnum> {
     private final Context context;
-    private final String[] values;
+    private final RollStringEnum[] values;
 
-    public RollArrayAdapter(Context context, String[] values) {
+    public RollArrayAdapter(Context context, RollStringEnum[] values) {
         super(context, R.layout.roll_layout, values);
         this.context = context;
         this.values = values;
@@ -25,23 +25,10 @@ public class RollArrayAdapter extends ArrayAdapter<String> {
         View rowView = inflater.inflate(R.layout.roll_layout, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.rollname);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.rollicon);
-        textView.setText(values[position]);
+        textView.setText(values[position].getRollString());
 
         // Change icon based on name
-        String s = values[position];
-
-        switch (s){
-            case "4d6 Drop Worst Roll":
-                imageView.setImageResource(R.drawable.fourd6b350);
-                break;
-            case "3d6 Assign As Rolled":
-                imageView.setImageResource(R.drawable.threed6unassigned50);
-                break;
-            case "3d6":
-                imageView.setImageResource(R.drawable.threed6assigned50);
-                break;
-        }
-
+        imageView.setImageResource(values[position].getRollIcon());
         return rowView;
     }
 }

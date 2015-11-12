@@ -8,11 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ClassArrayAdapter extends ArrayAdapter<String> {
+public class ClassArrayAdapter extends ArrayAdapter<ClassStringEnum> {
     private final Context context;
-    private final String[] values;
+    private final ClassStringEnum[] values;
 
-    public ClassArrayAdapter(Context context, String[] values) {
+    public ClassArrayAdapter(Context context, ClassStringEnum[] values) {
         super(context, R.layout.class_layout, values);
         this.context = context;
         this.values = values;
@@ -25,51 +25,10 @@ public class ClassArrayAdapter extends ArrayAdapter<String> {
         View rowView = inflater.inflate(R.layout.class_layout, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.classname);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.classicon);
-        textView.setText(values[position]);
+        textView.setText(values[position].getClassString());
 
-        // Change icon based on name
-        String s = values[position];
-
-        switch (s){
-            case "Barbarian":
-                imageView.setImageResource(R.drawable.barbarianicon50);
-                break;
-            case "Bard":
-                imageView.setImageResource(R.drawable.bardicon50);
-                break;
-            case "Cleric":
-                imageView.setImageResource(R.drawable.clericicon50);
-                break;
-            case "Druid":
-                imageView.setImageResource(R.drawable.druidicon50);
-                break;
-            case "Fighter":
-                imageView.setImageResource(R.drawable.fightericon50);
-                break;
-            case "Monk":
-                imageView.setImageResource(R.drawable.monkicon50);
-                break;
-            case "Paladin":
-                imageView.setImageResource(R.drawable.paladinicon50);
-                break;
-            case "Ranger":
-                imageView.setImageResource(R.drawable.rangericon50);
-                break;
-            case "Rogue":
-                imageView.setImageResource(R.drawable.rogueicon50);
-                break;
-            case "Sorcerer":
-                imageView.setImageResource(R.drawable.sorcerericon50);
-                break;
-            case "Warlock":
-                imageView.setImageResource(R.drawable.warlockicon50);
-                break;
-            case "Wizard":
-                imageView.setImageResource(R.drawable.wizardicon50);
-                break;
-
-        }
-
+        // Change icon based on class
+        imageView.setImageResource(values[position].getClassIcon());
         return rowView;
     }
 }

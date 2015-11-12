@@ -43,7 +43,7 @@ public class SelectRoll extends AppCompatActivity {
         }
 
 
-        RollArrayAdapter rollAdapter = new RollArrayAdapter(this, rolls);
+        RollArrayAdapter rollAdapter = new RollArrayAdapter(this, rollsEnum);
 
         mListView.setAdapter(rollAdapter);
         //Set an onClick to get the item selected by user

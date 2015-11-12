@@ -14,56 +14,16 @@ public class RollStats {
         if (rollString!=null){
             switch (rollString){
                 case FOUR_D6_DROP_WORST:
-                    //For 4d6 drop one
-                    //Roll 4 dice for each stat
-                    for (int j=0;j<6;j++) {
-                        for (int i = 0; i < 4; i++) {
-                            rollList.add(rollD6());
-                        }
-                        //Remove the lowest roll and sum the rest, then add it to the list of stats
-                        rollList.remove(Collections.min(rollList));
-                        statList.add(sum(rollList));
-                        rollList=new ArrayList<>();
-                    }
-                    //Assort the stats based upon class preference
-                    finalStats = assignStats(statList, classString);
+                    finalStats = fourD6DropWorst(rollList,statList,classString);
                     break;
                 case THREE_D6:
-                    //For 3d6 assign
-                    for (int j=0;j<6;j++) {
-                        for (int i = 0; i < 3; i++) {
-                            rollList.add(rollD6());
-                        }
-                        //Add the sum of the rolls to the stat list
-                        statList.add(sum(rollList));
-                        rollList=new ArrayList<>();
-                    }
-                    //Assort the stats upon class preference
-                    finalStats = assignStats(statList, classString);
+                    finalStats = threeD6(rollList, statList, classString);
                     break;
                 case THREE_D6_AS_ROLLED:
-                    //For 3d6, assign as rolled in order
-                    for (int j = 0; j < 6; j++) {
-                        for (int i = 0; i < 3; i++) {
-                            rollList.add(rollD6());
-                        }
-                        //Add the sum of the rolls to the stat list
-                        statList.add(sum(rollList));
-                        rollList = new ArrayList<>();
-                    }
-                    //Do not assort the stats - assign them in the order they are rolled
-                    for (int i = 0; i<statList.size();i++){
-                        finalStats[i] = statList.get(i);
-                    }
+                    finalStats=threeD6AsRolled(rollList,statList,classString);
                     break;
                 case STANDARD_ARRAY:
-                    int[] standardArray = new int[]{15,14,13,12,10,8};
-                    //Assign the standard stats to the stat list
-                    for (int i =0;i<standardArray.length;i++){
-                        statList.add(standardArray[i]);
-                    }
-                    //Assort the stats upon class preference
-                    finalStats = assignStats(statList, classString);
+                    finalStats=standardArray(statList, classString);
                     break;
             }
         }
@@ -74,6 +34,64 @@ public class RollStats {
             }
         }
         return finalStats;
+    }
+
+    private static int[] standardArray(ArrayList<Integer> statList, ClassStringEnum classString) {
+        int[] standardArray = new int[]{15,14,13,12,10,8};
+        //Assign the standard stats to the stat list
+        for (int i =0;i<standardArray.length;i++){
+            statList.add(standardArray[i]);
+        }
+        //Assort the stats upon class preference
+        return assignStats(statList, classString);
+    }
+
+    private static int[] threeD6AsRolled(ArrayList<Integer> rollList, ArrayList<Integer> statList, ClassStringEnum classString) {
+        //For 3d6, assign as rolled in order
+        int[] finalStats = new int[6];
+        for (int j = 0; j < 6; j++) {
+            for (int i = 0; i < 3; i++) {
+                rollList.add(rollD6());
+            }
+            //Add the sum of the rolls to the stat list
+            statList.add(sum(rollList));
+            rollList = new ArrayList<>();
+        }
+        //Do not assort the stats - assign them in the order they are rolled
+        for (int i = 0; i<statList.size();i++){
+            finalStats[i] = statList.get(i);
+        }
+        return finalStats;
+    }
+
+    private static int[] threeD6(ArrayList<Integer> rollList, ArrayList<Integer> statList, ClassStringEnum classString) {
+        //For 3d6 assign
+        for (int j=0;j<6;j++) {
+            for (int i = 0; i < 3; i++) {
+                rollList.add(rollD6());
+            }
+            //Add the sum of the rolls to the stat list
+            statList.add(sum(rollList));
+            rollList=new ArrayList<>();
+        }
+        //Assort the stats upon class preference
+        return assignStats(statList, classString);
+    }
+
+    private static int[] fourD6DropWorst(ArrayList<Integer> rollList, ArrayList<Integer> statList, ClassStringEnum classString){
+        //For 4d6 drop one
+        //Roll 4 dice for each stat
+        for (int j=0;j<6;j++) {
+            for (int i = 0; i < 4; i++) {
+                rollList.add(rollD6());
+            }
+            //Remove the lowest roll and sum the rest, then add it to the list of stats
+            rollList.remove(Collections.min(rollList));
+            statList.add(sum(rollList));
+            rollList=new ArrayList<>();
+        }
+        //Assort the stats based upon class preference
+        return assignStats(statList, classString);
     }
 
     private static int[] assignStats(ArrayList<Integer> statList, ClassStringEnum classString) {

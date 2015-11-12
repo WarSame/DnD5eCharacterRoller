@@ -48,7 +48,7 @@ public class SelectClass extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.listViewId);
 
         //Set adapter for the listview
-        ClassArrayAdapter classAdapter = new ClassArrayAdapter(this, classes);
+        ClassArrayAdapter classAdapter = new ClassArrayAdapter(this, classesEnum);
 
         mListView.setAdapter(classAdapter);
 

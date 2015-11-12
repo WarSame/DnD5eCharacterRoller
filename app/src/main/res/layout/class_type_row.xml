@@ -12,7 +12,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/classNameString"
         android:id="@+id/statName"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:gravity="center" />
 
     <View
@@ -24,11 +24,11 @@
         tools:ignore="ContentDescription"
         android:id="@+id/classicon"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="35dp"
         android:adjustViewBounds="true"
         android:src="@drawable/barbarianicon50"
         android:layout_weight="1"
-        android:layout_gravity="center_horizontal"/>
+        android:gravity="center"/>
     <TextView
         android:layout_width="0dp"
         android:layout_weight="3"
@@ -36,7 +36,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/classValString"
         android:id="@+id/statVal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"/>
 
 </LinearLayout>
