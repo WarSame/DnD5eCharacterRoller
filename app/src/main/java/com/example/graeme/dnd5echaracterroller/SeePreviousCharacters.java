@@ -68,7 +68,7 @@ public class SeePreviousCharacters extends AppCompatActivity {
                 line = br.readLine();
                 if (line!=null){
                     tmp.add(line);
-                    System.out.println(line);
+                    System.out.println("Previous characters:"+line);
                 }
             }while (line!=null);
 
@@ -79,6 +79,7 @@ public class SeePreviousCharacters extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
             Log.w("File error", "Unable to read file - FNF");
+            System.out.println("Error reading from file in prev chars");
         }
         //Then update the number of pages that we need to display
         pageCount = previousChars.size();

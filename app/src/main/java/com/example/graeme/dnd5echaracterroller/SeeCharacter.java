@@ -48,11 +48,9 @@ public class SeeCharacter extends AppCompatActivity {
         //Save generated character set to memory of phone
         String ROLL_HISTORY_FILE = "roll_history";
         writeToCharactersFile(ROLL_HISTORY_FILE);
-
     }
 
     private void writeToCharactersFile(String ROLL_HISTORY_FILE){
-
         //Read from your save file - if we have 10 chars already saved, remove the least recent.
         ArrayList<String> characterArray = new ArrayList<>();//Array of characters' strings: Classname Str Dex Con Wis Int Cha
         try {//Read strings in from file
@@ -62,14 +60,13 @@ public class SeeCharacter extends AppCompatActivity {
                 line = br.readLine();
                 if (line!=null){
                     characterArray.add(line);
-                    System.out.println(line);
                 }
             }while (line!=null);
-
             br.close();
         } catch (Exception e) {
             e.printStackTrace();
             Log.w("File error", "Unable to read file - FNF");
+            System.out.println("Error reading from file");
         }
         int maxCharactersInFile = 10;
 
@@ -77,7 +74,8 @@ public class SeeCharacter extends AppCompatActivity {
         try {
             if (characterArray.size()>=maxCharactersInFile){//If our file has ten chars already, then remove the oldest character
             //add our character to the front and write to the file
-                List<String> subCharacterArray = characterArray.subList(characterArray.size()-maxCharactersInFile, characterArray.size()-1);
+                System.out.println("Removing a character");
+                List<String> subCharacterArray = characterArray.subList(characterArray.size()-maxCharactersInFile, characterArray.size());
                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(openFileOutput(ROLL_HISTORY_FILE, Context.MODE_PRIVATE)));
                 subCharacterArray.remove(0);//Remove the oldest character
                 //Write the old characters
@@ -87,14 +85,17 @@ public class SeeCharacter extends AppCompatActivity {
                     bw.newLine();
                 }
                 //Write the new character
-                bw.write(classString.getClassString());//Write class type
+                String character = classString.getClassString();
                 for (int stat : finalStats) {//Write rolled stats in order
-                    bw.write(" " + String.valueOf(stat));
+                    character+=" "+String.valueOf(stat);
                 }
+                bw.write(character);
+                System.out.println("New character is:"+character);
                 bw.newLine();//End of new character
                 bw.close();
             }
             else {//If our file doesn't have 10 characters, just append to it
+                System.out.println("Appending to file.");
                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(openFileOutput(ROLL_HISTORY_FILE, Context.MODE_APPEND)));
                 bw.write(classString.getClassString());//Write class type
                 for (int stat : finalStats) {//Write rolled stats in order
@@ -105,6 +106,7 @@ public class SeeCharacter extends AppCompatActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Error writing to file");
             Log.w("File error","Unable to write to file");
         }
     }
