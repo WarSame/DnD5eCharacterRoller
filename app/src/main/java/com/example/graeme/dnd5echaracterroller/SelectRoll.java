@@ -63,7 +63,7 @@ public class SelectRoll extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_select_roll, menu);
+        inflater.inflate(R.menu.general_menu, menu);
         return true;
     }
 

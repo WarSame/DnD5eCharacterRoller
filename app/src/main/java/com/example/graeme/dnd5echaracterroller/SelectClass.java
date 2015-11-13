@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -63,9 +63,6 @@ public class SelectClass extends AppCompatActivity {
                 LinearLayout ll = (LinearLayout)v;
                 TextView tv = (TextView)(ll).findViewById(R.id.classname);
                 String tvText = (String)tv.getText();
-                for (int i =0;i<tvText.length();i++){
-                    System.out.println(tvText.charAt(i));
-                }
                 setClassString(ClassStringEnum.fromString(tvText));
 
                 startActivity(sendClassIntent);
@@ -77,7 +74,7 @@ public class SelectClass extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_select_class, menu);
+        inflater.inflate(R.menu.general_menu, menu);
         return true;
     }
 

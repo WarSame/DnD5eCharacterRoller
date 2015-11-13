@@ -3,8 +3,8 @@ package com.example.graeme.dnd5echaracterroller;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,7 +42,7 @@ public class SeeCharacter extends AppCompatActivity {
         fillViewValues();
 
         ImageView imageView = (ImageView) findViewById(R.id.classicon);
-        imageView.setImageResource(GetImage.SelectImage(classString.getClassString()));
+        imageView.setImageResource(classString.getClassIcon());
         imageView.setAdjustViewBounds(true);
 
         //Save generated character set to memory of phone
@@ -66,18 +66,16 @@ public class SeeCharacter extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
             Log.w("File error", "Unable to read file - FNF");
-            System.out.println("Error reading from file");
         }
         int maxCharactersInFile = 10;
 
         //Write your newly generated class to the save file
         try {
-            if (characterArray.size()>=maxCharactersInFile){//If our file has ten chars already, then remove the oldest character
-            //add our character to the front and write to the file
-                System.out.println("Removing a character");
-                List<String> subCharacterArray = characterArray.subList(characterArray.size()-maxCharactersInFile, characterArray.size());
+            if (characterArray.size()>=maxCharactersInFile){
+            //If our file has more than 10 characters, cut it to 9 most recent, then insert newest
+                //Cut out the 9 most recent characters to carry over
+                List<String> subCharacterArray = characterArray.subList(characterArray.size()-maxCharactersInFile+1, characterArray.size());
                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(openFileOutput(ROLL_HISTORY_FILE, Context.MODE_PRIVATE)));
-                subCharacterArray.remove(0);//Remove the oldest character
                 //Write the old characters
                 for (String character:subCharacterArray){
                     //For existing characters just put them back in the file
@@ -90,12 +88,10 @@ public class SeeCharacter extends AppCompatActivity {
                     character+=" "+String.valueOf(stat);
                 }
                 bw.write(character);
-                System.out.println("New character is:"+character);
                 bw.newLine();//End of new character
                 bw.close();
             }
             else {//If our file doesn't have 10 characters, just append to it
-                System.out.println("Appending to file.");
                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(openFileOutput(ROLL_HISTORY_FILE, Context.MODE_APPEND)));
                 bw.write(classString.getClassString());//Write class type
                 for (int stat : finalStats) {//Write rolled stats in order
@@ -106,7 +102,6 @@ public class SeeCharacter extends AppCompatActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Error writing to file");
             Log.w("File error","Unable to write to file");
         }
     }
@@ -120,7 +115,7 @@ public class SeeCharacter extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_see_character, menu);
+        inflater.inflate(R.menu.general_menu, menu);
         return true;
     }
 
@@ -203,7 +198,7 @@ public class SeeCharacter extends AppCompatActivity {
 
         //Values
         classValView.setText(classString.getClassString());
-        classImage.setImageResource(GetImage.SelectImage(classString.getClassString()));
+        classImage.setImageResource(classString.getClassIcon());
 
         strValView.setText(String.format("%d", finalStats[0]));
         dexValView.setText(String.format("%d", finalStats[1]));

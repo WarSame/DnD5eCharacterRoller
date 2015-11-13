@@ -28,7 +28,7 @@
         android:adjustViewBounds="true"
         android:src="@drawable/barbarianicon50"
         android:layout_weight="1"
-        android:gravity="center"/>
+        android:layout_gravity="center_horizontal"/>
     <TextView
         android:layout_width="0dp"
         android:layout_weight="3"

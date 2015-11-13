@@ -1,20 +1,18 @@
 package com.example.graeme.dnd5echaracterroller;
 
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -68,7 +66,6 @@ public class SeePreviousCharacters extends AppCompatActivity {
                 line = br.readLine();
                 if (line!=null){
                     tmp.add(line);
-                    System.out.println("Previous characters:"+line);
                 }
             }while (line!=null);
 
@@ -79,7 +76,6 @@ public class SeePreviousCharacters extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
             Log.w("File error", "Unable to read file - FNF");
-            System.out.println("Error reading from file in prev chars");
         }
         //Then update the number of pages that we need to display
         pageCount = previousChars.size();
@@ -92,7 +88,7 @@ public class SeePreviousCharacters extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_see_previous_characters, menu);
+        getMenuInflater().inflate(R.menu.general_menu, menu);
         return true;
     }
 
@@ -238,7 +234,8 @@ public class SeePreviousCharacters extends AppCompatActivity {
             }
 
             classValView.setText(classString);
-            classImage.setImageResource(GetImage.SelectImage(classString));
+            ClassStringEnum classEnum = ClassStringEnum.fromString(classString);
+            classImage.setImageResource(classEnum.getClassIcon());
             strValView.setText(String.format("%d", finalStats[0]));
             dexValView.setText(String.format("%d", finalStats[1]));
             conValView.setText(String.format("%d", finalStats[2]));

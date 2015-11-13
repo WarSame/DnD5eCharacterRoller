@@ -1,7 +1,5 @@
 package com.example.graeme.dnd5echaracterroller;
 
-import android.graphics.drawable.Drawable;
-
 //Enum for class string
 public enum ClassStringEnum {
     BARBARIAN("Barbarian", new Integer[]{0, 2, 1, 5, 3, 4},R.drawable.barbarianicon50 ),
