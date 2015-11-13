@@ -21,6 +21,7 @@ public class SelectRoll extends AppCompatActivity {
     public static RollStringEnum getRollString() {
         return rollString;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,13 +37,6 @@ public class SelectRoll extends AppCompatActivity {
 
         //Initialize the roll options available, then fill them into the list view
         final RollStringEnum[] rollsEnum = RollStringEnum.values();
-
-        final String[] rolls= new String[rollsEnum.length];
-        for (int i =0;i<rollsEnum.length;i++){
-            rolls[i]=rollsEnum[i].getRollString();
-        }
-
-
         RollArrayAdapter rollAdapter = new RollArrayAdapter(this, rollsEnum);
 
         mListView.setAdapter(rollAdapter);
