@@ -2,37 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".SelectPath"
     android:background="#E2D5B0"
     android:weightSum="100">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/dnd_mm_art"
-        android:text="@string/rollCharacterString"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="49.5"
-        android:gravity="center"
+        android:text="@string/rollCharacterString"
+        android:background="@drawable/dnd_mm_art"
         style="@style/OverlayText"
+        android:gravity="center"
         android:contentDescription="@string/rollCharacterString"
         android:onClick="rollCharacter"
         android:id="@+id/rollCharacterButton" />
 
     <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
+        android:layout_width="0dp"
         android:layout_weight="1">
     </Space>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/dnd_dmg_art"
-        android:text="@string/seePreviousCharactersString"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="49.5"
-        android:gravity="center"
+        android:text="@string/seePreviousCharactersString"
+        android:background="@drawable/dnd_dmg_art"
         style="@style/OverlayText"
+        android:gravity="center"
         android:contentDescription="@string/rollCharacterString"
         android:onClick="seePreviousCharacters"
         android:id="@+id/seePreviousCharactersButton" />
