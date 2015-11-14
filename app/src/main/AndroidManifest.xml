@@ -11,14 +11,12 @@
         <activity
             android:name=".SelectClass"
             android:label="@string/title_activity_select_class"
-            android:parentActivityName=".SelectRoll"
-            android:screenOrientation="portrait" >
+            android:parentActivityName=".SelectRoll" >
         </activity>
         <activity
             android:name=".SelectRoll"
             android:label="@string/title_activity_select_roll"
-            android:parentActivityName=".SelectPath"
-            android:screenOrientation="portrait" >
+            android:parentActivityName=".SelectPath" >
         </activity>
         <activity
             android:name=".SeeCharacter"
@@ -28,8 +26,7 @@
         </activity>
         <activity
             android:name=".SelectPath"
-            android:label="@string/app_name"
-            android:configChanges="orientation" >
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
