@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -41,9 +40,9 @@ public class SeeCharacter extends AppCompatActivity {
         //Fill the values for the elements. This assumes it is opened in
         fillViewValues();
 
-        ImageView imageView = (ImageView) findViewById(R.id.classicon);
-        imageView.setImageResource(classString.getClassIcon());
-        imageView.setAdjustViewBounds(true);
+        //ImageView imageView = (ImageView) findViewById(R.id.classicon);
+        //imageView.setImageResource(classString.getClassIcon());
+        //imageView.setAdjustViewBounds(true);
 
         //Save generated character set to memory of phone
         String ROLL_HISTORY_FILE = "roll_history";
@@ -65,7 +64,6 @@ public class SeeCharacter extends AppCompatActivity {
             br.close();
         } catch (Exception e) {
             e.printStackTrace();
-            Log.w("File error", "Unable to read file - FNF");
         }
         int maxCharactersInFile = 10;
 
@@ -102,7 +100,6 @@ public class SeeCharacter extends AppCompatActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Log.w("File error","Unable to write to file");
         }
     }
 
@@ -166,7 +163,7 @@ public class SeeCharacter extends AppCompatActivity {
         //Get the layout's locations
         TextView classNameView = (TextView) llClass.findViewById(R.id.statName);
         TextView classValView = (TextView) llClass.findViewById(R.id.statVal);
-        ImageView classImage = (ImageView)  llClass.findViewById(R.id.classicon);
+        //ImageView classImage = (ImageView)  llClass.findViewById(R.id.classicon);
 
         TextView strNameView = (TextView) llStr.findViewById(R.id.statName);
         TextView strValView = (TextView) llStr.findViewById(R.id.statVal);
@@ -198,7 +195,7 @@ public class SeeCharacter extends AppCompatActivity {
 
         //Values
         classValView.setText(classString.getClassString());
-        classImage.setImageResource(classString.getClassIcon());
+        //classImage.setImageResource(classString.getClassIcon());
 
         strValView.setText(String.format("%d", finalStats[0]));
         dexValView.setText(String.format("%d", finalStats[1]));

@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,18 +31,18 @@ public class SeePreviousCharacters extends AppCompatActivity {
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    private ViewPager mViewPager;
     private int pageCount;
     private ArrayList<String> previousChars;
     public static final String EMPTY_FILE_STRING = "EMPTY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ViewPager mViewPager;
+        SectionsPagerAdapter mSectionsPagerAdapter;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_see_previous_characters);
 
@@ -75,7 +74,6 @@ public class SeePreviousCharacters extends AppCompatActivity {
             br.close();
         } catch (Exception e) {
             e.printStackTrace();
-            Log.w("File error", "Unable to read file - FNF");
         }
         //Then update the number of pages that we need to display
         pageCount = previousChars.size();
@@ -121,9 +119,9 @@ public class SeePreviousCharacters extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             if (pageCount==0){
-                return PlaceholderFragment.newInstance( EMPTY_FILE_STRING );
+                return PreviousCharacterFragment.newInstance( EMPTY_FILE_STRING );
             }
-            return PlaceholderFragment.newInstance( previousChars.get(position) );
+            return PreviousCharacterFragment.newInstance( previousChars.get(position) );
         }
 
         @Override
@@ -139,7 +137,7 @@ public class SeePreviousCharacters extends AppCompatActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class PreviousCharacterFragment extends Fragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -150,16 +148,16 @@ public class SeePreviousCharacters extends AppCompatActivity {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(String classString) {
+        public static PreviousCharacterFragment newInstance(String classString) {
             //Return data for this version of a page
-            PlaceholderFragment fragment = new PlaceholderFragment();
+            PreviousCharacterFragment fragment = new PreviousCharacterFragment();
             Bundle args = new Bundle();
             args.putString(CHAR_STRING, classString);
             fragment.setArguments(args);
             return fragment;
         }
 
-        public PlaceholderFragment() {
+        public PreviousCharacterFragment() {
         }
 
         @Override
@@ -170,7 +168,6 @@ public class SeePreviousCharacters extends AppCompatActivity {
             String charString=getArguments().getString(CHAR_STRING);//Get character string values from the file
             assert charString!=null;
             if (charString.equals(EMPTY_FILE_STRING)){//If the file is empty, show that there are no characters
-                Log.i("Empty string","Empty string from file");
                 pageView = inflater.inflate(R.layout.fragment_no_previous_characters, container, false);
             }
             else {//If it has characters, create the character layout and fill it
@@ -194,7 +191,7 @@ public class SeePreviousCharacters extends AppCompatActivity {
             //Get the layout's locations within a row
             TextView classNameView = (TextView) llClass.findViewById(R.id.statName);
             TextView classValView = (TextView) llClass.findViewById(R.id.statVal);
-            ImageView classImage = (ImageView)  llClass.findViewById(R.id.classicon);
+            //ImageView classImage = (ImageView)  llClass.findViewById(R.id.classicon);
 
             TextView strNameView = (TextView) llStr.findViewById(R.id.statName);
             TextView strValView = (TextView) llStr.findViewById(R.id.statVal);
@@ -234,8 +231,8 @@ public class SeePreviousCharacters extends AppCompatActivity {
             }
 
             classValView.setText(classString);
-            ClassStringEnum classEnum = ClassStringEnum.fromString(classString);
-            classImage.setImageResource(classEnum.getClassIcon());
+            //ClassStringEnum classEnum = ClassStringEnum.fromString(classString);
+            //classImage.setImageResource(classEnum.getClassIcon());
             strValView.setText(String.format("%d", finalStats[0]));
             dexValView.setText(String.format("%d", finalStats[1]));
             conValView.setText(String.format("%d", finalStats[2]));
